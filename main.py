@@ -2,19 +2,16 @@
 def main():
     path_to_file = "books/frankenstein.txt"
     book = getBookText(path_to_file)
-    print(wordCount(book))
-
-    characterCount = perCharacterCount(book)
-    print(characterCount)
+    bookReport(book)
 
 def getBookText(pathToBook):
     with open(pathToBook) as f:
         return f.read()
 
-def wordCount(input):
+def getWordCount(input):
     return len(input.split())
 
-def perCharacterCount(input):
+def getCharacterCount(input):
     characterCount = {}
     for char in input:
         lc = char.lower()
@@ -23,6 +20,22 @@ def perCharacterCount(input):
         else:
             characterCount[lc] = 1
     return characterCount
+
+def bookReport(book):
+    wordCount= getWordCount(book)
+    characterCount = getCharacterCount(book)
+
+    # Format output
+    print("--- Begin report of books/frankenstein.txt ---")
+    
+    print(f"{wordCount} words found in book.")
+    print("\n")
+
+    for char in characterCount:
+        print(f"The {repr(char)} character was found {characterCount[char]} times.")
+
+    print("--- End report ---")
+
 
     # Oh my god, so unecessary:
     #def wordCount(input):
